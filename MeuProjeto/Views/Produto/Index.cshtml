@@ -1,0 +1,34 @@
+@{
+    ViewData["Title"] = "Lista de Produtos";
+
+    var nomes = ViewBag.ListaNomes as List<string>;
+    var precos = ViewBag.ListaPrecos as List<double>;
+}
+
+<h1 class="my-4">Nossos Produtos</h1>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Nome</th>
+            <th>Preço</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < nomes.Count; i++)
+        {
+            string classeCor = precos[i] < 100.00 ? "table-success" : "";
+
+            <tr class="@classeCor">
+                <td>@(i + 1)</td> 
+                <td>@nomes[i]</td> 
+                <td>R$ @precos[i].ToString("F2")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="alert alert-info mt-3">
+    <strong>Total: @nomes.Count produtos</strong>
+</div>
