@@ -1,0 +1,80 @@
+@{
+    ViewData["Title"] = "Meu Boletim";
+
+    // Resgatando as listas da ViewBag
+    var disciplinas = ViewBag.Disciplinas as List<string>;
+    var notas = ViewBag.Notas as List<double>;
+
+    double somaNotas = 0;
+}
+
+<h2 class="my-4">Meu Boletim Escolar</h2>
+
+<table class="table table-bordered align-middle">
+    <thead class="table-dark">
+        <tr>
+            <th>Disciplina</th>
+            <th>Nota</th>
+            <th>Status</th>
+            <th>Classificação</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < disciplinas.Count; i++)
+        {
+            // Somando a nota atual para o cálculo da média geral no final
+            somaNotas += notas[i];
+
+            <tr>
+                <td>@disciplinas[i]</td>
+                <td>@notas[i].ToString("F1")</td>
+                
+                <td>
+                    @if (notas[i] >= 6.0) @* Defini 6.0 como média para passar, você pode ajustar se o seu professor usar 7.0 *@
+                    {
+                        <span class="badge bg-success">Aprovado</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-danger">Reprovado</span>
+                    }
+                </td>
+
+                <td>
+                    @{
+                      
+                        string classificacao = "";
+                        
+                        switch (notas[i])
+                        {
+                            case double n when n >= 9.0:
+                                classificacao = "A";
+                                break;
+                            case double n when n >= 7.0:
+                                classificacao = "B";
+                                break;
+                            case double n when n >= 5.0:
+                                classificacao = "C";
+                                break;
+                            default:
+                                classificacao = "D";
+                                break;
+                        }
+                    }
+                    <strong>@classificacao</strong>
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot class="table-light">
+        <tr>
+            <td colspan="3" class="text-end"><strong>Média Geral:</strong></td>
+            <td>
+                @{
+                    double mediaGeral = somaNotas / disciplinas.Count;
+                }
+                <span class="text-primary font-weight-bold">@mediaGeral.ToString("F1")</span>
+            </td>
+        </tr>
+    </tfoot>
+</table>

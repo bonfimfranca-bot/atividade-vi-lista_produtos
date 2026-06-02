@@ -21,4 +21,14 @@ public class HomeController : Controller
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
-}
+    public IActionResult Boletim()
+    {
+        List<string> disciplinas = new List<string> { "Matemática", "Programação Web", "Banco de Dados", "Estrutura de Dados", "Redes" };
+        List<double> notas = new List<double> { 9.5, 8.0, 6.2, 4.5, 7.0 };
+
+        ViewBag.Disciplinas = disciplinas;
+        ViewBag.Notas = notas;
+
+        return View();
+    }
+};
