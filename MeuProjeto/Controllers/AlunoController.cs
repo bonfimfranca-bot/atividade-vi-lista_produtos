@@ -18,13 +18,17 @@ namespace MeuProjeto.Controllers
             if (ModelState.IsValid)
             {
                 
-                ViewBag.MensagemSucesso = "Aluno cadastrado com sucesso e sem erros!";
+                return RedirectToAction("Confirmacao", aluno);
                 
-               
-                return View();
             }
 
             return View(aluno);
+        }
+        
+        [HttpGet]
+        public IActionResult Confirmacao(Aluno aluno)
+        {
+            return View(aluno); 
         }
     }
 }

@@ -1,0 +1,31 @@
+@model MeuProjeto.Models.Aluno
+
+@{
+    ViewData["Title"] = "Cadastro Confirmado";
+}
+
+<div class="container my-5">
+    <div class="alert alert-success role="alert" class="p-4 text-center mb-4">
+        <h4 class="alert-heading">🎉 Sucesso!</h4>
+        <p class="mb-0">O aluno foi cadastrado no sistema com êxito.</p>
+    </div>
+
+    <div class="card shadow-sm mb-4">
+        <div class="card-header bg-primary text-white">
+            <h5 class="card-title mb-0">Dados do Aluno Cadastrado</h5>
+        </div>
+        <div class="card-body">
+            <p><strong>Nome:</strong> @Model.Nome</p>
+            <p><strong>E-mail:</strong> @Model.Email</p>
+            <p><strong>RA:</strong> @Model.RA</p>
+            <p><strong>Curso:</strong> @Model.Curso</p>
+            <p><strong>Data de Nascimento:</strong> @Model.DataNascimento.ToString("dd/MM/yyyy")</p>
+        </div>
+    </div>
+
+    <div class="text-center">
+        <a asp-action="Cadastrar" class="btn btn-outline-primary btn-lg">
+            <i class="bi bi-plus-circle"></i> Cadastrar outro aluno
+        </a>
+    </div>
+</div>
