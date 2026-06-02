@@ -1,0 +1,39 @@
+@model MeuProjeto.Models.ImcViewModel
+
+@{
+    ViewData["Title"] = "Cálculo de IMC";
+}
+
+<div class="container my-5" style="max-width: 500px;">
+    <h2 class="text-center mb-4">Calculadora de IMC</h2>
+
+    <form asp-action="Calcular" method="post" class="p-4 border rounded bg-light shadow-sm">
+        <div class="mb-3">
+            <label asp-for="Peso" class="form-label">Peso (kg) - Ex: 75,5</label>
+            <input asp-for="Peso" class="form-control" type="number" step="0.1" />
+            <span asp-validation-for="Peso" class="text-danger small"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Altura" class="form-label">Altura (m) - Ex: 1,75</label>
+            <input asp-for="Altura" class="form-control" type="number" step="0.01" />
+            <span asp-validation-for="Altura" class="text-danger small"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">Calcular IMC</button>
+    </form>
+
+
+    @if (Model.ResultadoImc.HasValue)
+    {
+        <div class="card mt-4 border-primary text-center">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">Resultado do Processamento</h5>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title text-primary">@Model.ResultadoImc.Value.ToString("F2")</h3>
+                <p class="card-text fs-5">Classificação: <strong>@Model.Classificacao</strong></p>
+            </div>
+        </div>
+    }
+</div>
