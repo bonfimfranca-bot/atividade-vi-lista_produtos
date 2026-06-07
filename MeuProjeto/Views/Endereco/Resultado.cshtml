@@ -1,0 +1,33 @@
+@model MeuProjeto.Models.EnderecoViewModel
+
+<div class="container mt-5" style="max-width: 600px;">
+    <div class="card p-4 shadow-sm border-primary">
+        <h2 class="mb-4 text-center text-primary">Dados Confirmados (Server-Side)</h2>
+        <p class="text-muted text-center">Esta é uma visualização somente leitura dos dados processados.</p>
+        
+        <hr />
+
+        <div class="mb-3">
+            <label class="fw-bold">CEP:</label>
+            <input type="text" class="form-control" value="@Model.Cep" disabled />
+        </div>
+        <div class="mb-3">
+            <label class="fw-bold">Logradouro:</label>
+            <input type="text" class="form-control" value="@Model.Logradouro" disabled />
+        </div>
+        <div class="mb-3">
+            <label class="fw-bold">Bairro:</label>
+            <input type="text" class="form-control" value="@Model.Bairro" disabled />
+        </div>
+        <div class="mb-3">
+            <label class="fw-bold">Cidade / UF:</label>
+            <input type="text" class="form-control" value="@Model.Localidade - @Model.Uf" disabled />
+        </div>
+        <div class="mb-3">
+            <label class="fw-bold">Número Incremental:</label>
+            <input type="text" class="form-control" value="@Model.Numero" disabled />
+        </div>
+
+        <a asp-action="Buscar" class="btn btn-outline-secondary w-100 mt-3">Fazer Nova Busca</a>
+    </div>
+</div>

@@ -30,6 +30,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWx1bm8vQ29uZmlybWFjYW8uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[/workspaces/atividade-vi-lista_produtos/MeuProjeto/Views/Endereco/Buscar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRW5kZXJlY28vQnVzY2FyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/workspaces/atividade-vi-lista_produtos/MeuProjeto/Views/Endereco/Resultado.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRW5kZXJlY28vUmVzdWx0YWRvLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [/workspaces/atividade-vi-lista_produtos/MeuProjeto/Views/Home/Boletim.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9Cb2xldGltLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 

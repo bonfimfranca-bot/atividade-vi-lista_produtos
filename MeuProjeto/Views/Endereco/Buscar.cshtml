@@ -1,0 +1,104 @@
+@model MeuProjeto.Models.EnderecoViewModel
+
+<div class="container mt-5" style="max-width: 600px;">
+    <div class="card p-4 shadow-sm">
+        <h2 class="mb-4 text-center">Buscar Endereço</h2>
+        
+        <form id="formEndereco">
+            <div class="mb-3">
+                <label class="form-label">CEP</label>
+                <input type="text" id="cep" class="form-control" placeholder="00000-000" required />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Logradouro</label>
+                <input type="text" id="logradouro" class="form-control" readonly />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Bairro</label>
+                <input type="text" id="bairro" class="form-control" readonly />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Cidade</label>
+                <input type="text" id="cidade" class="form-control" readonly />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">UF</label>
+                <input type="text" id="uf" class="form-control" readonly />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Número (Complemento do Usuário)</label>
+                <input type="text" id="numero" class="form-control" placeholder="Ex: 123" required />
+            </div>
+
+            <button type="submit" class="btn btn-success w-100">Enviar para o Servidor</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            
+            $('#cep').blur(function () {
+                var cep = $(this).val().replace(/\D/g, '');
+
+                if (cep != "") {
+                    var validacep = /^[0-8]{8}$/;
+
+                    if(validacep.test(cep)) {
+                        
+                        $('#logradouro').val("Buscando...");
+                        $('#bairro').val("Buscando...");
+                        $('#cidade').val("Buscando...");
+                        $('#uf').val("...");
+
+                        // Requisição AJAX para a API do ViaCEP
+                        $.getJSON("https://viacep.com.br/ws/" + cep + "/json/?callback=?", function (dados) {
+                            if (!("erro" in dados)) {
+                                // Atualiza os campos com os valores da API
+                                $('#logradouro').val(dados.logradouro);
+                                $('#bairro').val(dados.bairro);
+                                $('#cidade').val(dados.localidade);
+                                $('#uf').val(dados.uf);
+                            } else {
+                                alert("CEP não encontrado.");
+                                $('#formEndereco')[0].reset();
+                            }
+                        });
+                    }
+                }
+            });
+
+
+            $('#formEndereco').submit(function (e) {
+                e.preventDefault(); 
+
+                var dadosEndereco = {
+                    Cep: $('#cep').val(),
+                    Logradouro: $('#logradouro').val(),
+                    Bairro: $('#bairro').val(),
+                    Localidade: $('#cidade').val(),
+                    Uf: $('#uf').val(),
+                    Numero: $('#numero').val()
+                };
+
+                $.ajax({
+                    url: '/Endereco/Processar',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(dadosEndereco),
+                    success: function (response) {
+                        
+                        if (response.redirectUrl) {
+                            window.location.href = response.redirectUrl;
+                        }
+                    },
+                    error: function () {
+                        alert("Erro ao enviar os dados para o servidor.");
+                    }
+                });
+            });
+        });
+    </script>
+}
